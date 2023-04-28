@@ -50,8 +50,8 @@ def main():
             messagebox.showerror('Incorrect', 'The word is not correct')
         else:
             messagebox.showinfo('Correct', 'The word is correct!')
-        quit()
-        main()
+            quit()
+            main()
         
     def quit():
         main_window.destroy()
@@ -78,11 +78,11 @@ def main():
     jumble_label = tk.Label(top_frame, text=f'Jumble: {jumble}', font=('Comic Sans MS', 22))
     jumble_label.pack(side='top')
 
-    enter_button = tk.Button(bottom_frame, text='Enter', command=lambda: guess(correct, rand_word))
+    enter_button = tk.Button(bottom_frame, text='Enter', font=('Comic Sans MS', 16), command=lambda: guess(correct, rand_word))
     enter_button.pack(side='left', pady=5, padx=3)
-    quit_button = tk.Button(bottom_frame, text='Quit', command=quit)
+    quit_button = tk.Button(bottom_frame, text='Quit', font=('Comic Sans MS', 16), command=quit)
     quit_button.pack(side='left', pady=5, padx=3)
-    about_button = tk.Button(bottom_frame, text='About', command=lambda: messagebox.showinfo('About','This game chooses a word from a category, then jumbles the letters and lets the user guess the word'))
+    about_button = tk.Button(bottom_frame, text='About', font=('Comic Sans MS', 16), command=lambda: messagebox.showinfo('About','This game chooses a word from a category, then jumbles the letters and lets the user guess the word'))
     about_button.pack(side='left', pady=5, padx=3)
 
     main_window.mainloop()
