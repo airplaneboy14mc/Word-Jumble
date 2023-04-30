@@ -73,6 +73,54 @@ def main():
         
         def exit_program(e):
             quit()
+        
+        def settings():
+            def destroy_settings(e):
+                settings.destroy()
+            settings = tk.Tk()
+            settings.title('Settings')
+            settings.geometry('420x275')
+            settings.resizable(False, False)
+            settings.bind('<Escape>', destroy_settings)
+            settings.bind('<Delete>', destroy_settings)
+            top_frame = tk.Frame(settings)
+            top_frame.pack(side='top', pady=4)
+            left_side_frame = tk.Frame(settings)
+            left_side_frame.pack(side='left', padx=4)
+            right_side_frame = tk.Frame(settings)
+            right_side_frame.pack(side='right', padx=4)
+            settings_label = tk.Label(top_frame, text='Settings', font=('Comic Sans MS', 32))
+            settings_label.pack(side='top')
+            controls_button = tk.Button(left_side_frame, text='Controls', font=('Comic Sans MS', 16), command=controls)
+            controls_button.pack(side='top')
+            controls_label = tk.Label(right_side_frame, text='Edit the keyboard controls \nused in the app.', font=('Comic Sans MS', 14))
+            controls_label.pack(side='top')
+            font_button = tk.Button(left_side_frame, width=7, text='Fonts', font=('Comic Sans MS', 16), command=lambda: print('e'))
+            font_button.pack(side='top')
+            font_label = tk.Label(right_side_frame, text='Edit the fonts used in the program.', font=('Comic Sans MS', 14))
+            font_label.pack(side='top')
+
+            settings.mainloop()
+            
+        def controls():
+            def destroy_cont(e):
+                cont.destroy()
+            cont = tk.Tk()
+            cont.title('Controls')
+            cont.geometry('420x275')
+            cont.resizable(False, False)
+            cont.bind('<Escape>', destroy_cont)
+            cont.bind('<Delete>', destroy_cont)
+            top_frame = tk.Frame(cont)
+            left_frame = tk.Frame(cont)
+            right_frame = tk.Frame(cont)
+            top_frame.pack(side='top')
+            left_frame.pack(side='left')
+            right_frame.pack(side='right')
+            controls_label = tk.Label(top_frame, text='Controls', font=('Comic Sans MS', 32))
+            controls_label.pack(side='top')
+            
+            cont.mainloop()
 
         main_window = tk.Tk()
         main_window.title('Word Jumble Game')
@@ -81,8 +129,8 @@ def main():
         main_window.bind('<Return>', handler)
         main_window.bind('<Escape>', exit_program)
         main_window.bind('<Delete>', exit_program)
-        #Working on Icon stuff, might take a while however
-        #main_window.iconphoto(False, 'wordjumbleicon.png')
+        photo = tk.PhotoImage(file='wordjumbleicon.png')
+        main_window.wm_iconphoto(True, photo)
             
         top_frame = tk.Frame(main_window)
         bottom_frame = tk.Frame(main_window)
@@ -101,10 +149,8 @@ def main():
         jumble_label = tk.Label(top_frame, text=f'Jumble: {jumble}', font=('Comic Sans MS', 22))
         jumble_label.pack(side='top')
 
-        enter_button = tk.Button(bottom_frame, text='Enter', font=('Comic Sans MS', 16), command=guess)
-        enter_button.pack(side='left', pady=5, padx=3)
-        quit_button = tk.Button(bottom_frame, text='Quit', font=('Comic Sans MS', 16), command=quit)
-        quit_button.pack(side='left', pady=5, padx=3)
+        controls_button = tk.Button(bottom_frame, text='Settings', font=('Comic Sans MS', 16), command=settings)
+        controls_button.pack(side='left', pady=5, padx=3)
         about_button = tk.Button(bottom_frame, text='About', font=('Comic Sans MS', 16), command=lambda: messagebox.showinfo('About','This game chooses a word from a category, then jumbles the letters and lets the user guess the word'))
         about_button.pack(side='left', pady=5, padx=3)
         
