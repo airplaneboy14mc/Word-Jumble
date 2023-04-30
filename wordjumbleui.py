@@ -32,6 +32,7 @@ def check_cat(category):
 		return "Vegetables"
 	else:
 		return "Could not determine category."
+
 def main():
     try:
         def quit():
@@ -53,15 +54,6 @@ def main():
             else:
                 pass
 
-        def guess():
-            guess = str(entry.get())
-            if correct != guess:
-                messagebox.showerror('Incorrect', 'The word is not correct.')
-            else:
-                messagebox.showinfo('Correct', 'The word is correct!')
-                quit()
-                main()
-        
         def handler(e):
             guess = str(entry.get())
             if correct != guess:
@@ -91,11 +83,11 @@ def main():
             right_side_frame.pack(side='right', padx=4)
             settings_label = tk.Label(top_frame, text='Settings', font=('Comic Sans MS', 32))
             settings_label.pack(side='top')
-            controls_button = tk.Button(left_side_frame, text='Controls', font=('Comic Sans MS', 16), command=controls)
+            controls_button = tk.Button(left_side_frame, text='Controls', font=('Comic Sans MS', 16), command=lambda: messagebox.showwarning('Disabled', 'This feature is disabled due to not being functional at the time.'))
             controls_button.pack(side='top')
             controls_label = tk.Label(right_side_frame, text='Edit the keyboard controls \nused in the app.', font=('Comic Sans MS', 14))
             controls_label.pack(side='top')
-            font_button = tk.Button(left_side_frame, width=7, text='Fonts', font=('Comic Sans MS', 16), command=lambda: print('e'))
+            font_button = tk.Button(left_side_frame, width=7, text='Fonts', font=('Comic Sans MS', 16), command=lambda: messagebox.showwarning('Disabled', 'This feature is disabled due to not being functional at the time.'))
             font_button.pack(side='top')
             font_label = tk.Label(right_side_frame, text='Edit the fonts used in the program.', font=('Comic Sans MS', 14))
             font_label.pack(side='top')
@@ -121,6 +113,26 @@ def main():
             controls_label.pack(side='top')
             
             cont.mainloop()
+
+        def font_win():
+            font = 'Comic Sans MS'
+            def destroy_fonts(e):
+                f_win.destroy()
+            def font_handler(e) -> font:
+                font = str(choose_font.get())
+                e = font
+            f_win = tk.Tk()
+            f_win.title('Fonts')
+            f_win.geometry('175x75')
+            f_win.resizable(False, False)
+            f_win.bind('<Escape>', destroy_fonts)
+            f_win.bind('<Delete>', destroy_fonts)
+            font_label = tk.Label(f_win, text='Choose Font:', font=(font, 22))
+            font_label.pack(side='top', pady=3)
+            choose_font = tk.Entry(f_win)
+            choose_font.pack(side='bottom', pady=7)
+            f_win.bind('<Return>', font_handler)
+            f_win.mainloop()
 
         main_window = tk.Tk()
         main_window.title('Word Jumble Game')
